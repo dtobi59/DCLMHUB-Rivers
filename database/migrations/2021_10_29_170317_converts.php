@@ -13,13 +13,16 @@ class Converts extends Migration
      */
     public function up()
     {
+        Schema::create('converts', function (Blueprint $table) {
+
         $table->id();
-        $table->string('name');
-        $table->string('phone');
-        $table->string('address');
-        $table->datetime('date');
-        $table->string('old_group');
+        $table->string('name')->nullable();
+        $table->string('phone')->nullable();
+        $table->string('address')->nullable();
+        $table->datetime('date')->nullable();
+        $table->string('old_group')->nullable();
         $table->timestamps();
+        });
     }
 
     /**
