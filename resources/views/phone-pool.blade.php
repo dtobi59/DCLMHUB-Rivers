@@ -25,48 +25,56 @@
         </style>
     </head>
     <body class="antialiased">
-    <div class="block">
-  <h1 class="text-gray-700">Showers of blessing through chirst </h1>
-  <h3>Program Schedules</h3>        
-  <div class="mt-2">
-  <div>
-      <label class="inline-flex items-center">
-        <input name="date[]" value="2021-10-27" type="checkbox" class="form-checkbox" checked />
-        <span class="ml-2">Day 1</span>
-      </label>
-    </div>
-    <div>
-      <label class="inline-flex items-center">
-        <input name="date[]" value="2021-10-28" type="checkbox" class="form-checkbox" checked />
-        <span class="ml-2">Day 2</span>
-      </label>
-    </div>
+   <div class="p-4">
+   <div class="block">
+          <h1 class="text-gray-700">Showers of blessing through Christ </h1>
+          <h3>Program Schedules</h3>        
+          <div class="mt-2">
+          <div>
+              <label class="inline-flex items-center">
+                <input disabled="disabled" name="date[]" value="2021-10-27" type="checkbox" class="form-checkbox" checked />
+                <span class="ml-2">Day 1</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input disabled="disabled" name="date[]" value="2021-10-28" type="checkbox" class="form-checkbox" checked />
+                <span class="ml-2">Day 2</span>
+              </label>
+            </div>
 
-    <div>
-      <label class="inline-flex items-center">
-        <input name="date[]" value="2021-10-29" type="checkbox" class="form-checkbox" checked />
-        <span class="ml-2">Day 3</span>
-      </label>
-    </div>
-    <div>
-      <label class="inline-flex items-center">
-        <input name="date[]" value="2021-10-30" type="checkbox" class="form-checkbox" />
-        <span class="ml-2">Day 4</span>
-      </label>
-    </div>
-    <div>
-      <label class="inline-flex items-center">
-        <input name="date[]" value="2021-10-31" disabled="disabled" type="checkbox" class="form-checkbox" />
-        <span class="ml-2">Day 5</span>
-      </label>
-    </div>
-  </div>
-</div>
-        <label class="text-gray-700" for="name">
-           Phone Pool
-        </label>
-        <textarea  class="border border-gray-300 w-full py-2 px-4 bg-gray-100 text-gray-700 placeholder-gray-400  rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Phone Pool" name="phonepool" id="phonepool">Olaboye David Tobi</textarea>
+            <div>
+              <label class="inline-flex items-center">
+                <input disabled="disabled" name="date[]" value="2021-10-29" type="checkbox" class="form-checkbox" checked />
+                <span class="ml-2">Day 3</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input disabled="disabled" name="date[]" value="2021-10-30" type="checkbox" class="form-checkbox" />
+                <span class="ml-2">Day 4</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input name="date[]" value="2021-10-31" disabled="disabled" type="checkbox" class="form-checkbox" />
+                <span class="ml-2">Day 5</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <label class="font-bold text-gray-700" for="name">
+            Phone Pool
+          </label>
+        </div>
+        <div class="block">
+           <textarea 
+           class="block 
+           border rounded-md w-full py-2 px-4 bg-gray-100 text-gray-700 placeholder-gray-400  rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Phone Pool" name="phonepool" id="phonepool">Loading Phone Contact</textarea>
+        </div>
         <p>Phone Count:<span id="phone_count">0</span></p>
+   </div>
 
     </body>
 
