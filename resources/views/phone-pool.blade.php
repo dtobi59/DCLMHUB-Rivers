@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
         <!-- Styles -->
         <style>
@@ -30,34 +31,34 @@
           <h1 class="text-gray-700">Showers of blessing through Christ </h1>
           <h3>Program Schedules</h3>        
           <div class="mt-2">
-          <div>
-              <label class="inline-flex items-center">
-                <input disabled="disabled" name="date[]" value="2021-10-27" type="checkbox" class="form-checkbox" checked />
+          <div class="form-check">
+              <label class="form-check-label">
+                <input disabled="disabled" name="date[]" value="2021-10-27" type="checkbox" class="form-check-input" checked />
                 <span class="ml-2">Day 1</span>
               </label>
             </div>
-            <div>
-              <label class="inline-flex items-center">
-                <input disabled="disabled" name="date[]" value="2021-10-28" type="checkbox" class="form-checkbox" checked />
+            <div class="form-check">
+              <label class="form-check-label">
+                <input disabled="disabled" name="date[]" value="2021-10-28" type="checkbox" class="form-check-input" checked />
                 <span class="ml-2">Day 2</span>
               </label>
             </div>
 
-            <div>
-              <label class="inline-flex items-center">
-                <input disabled="disabled" name="date[]" value="2021-10-29" type="checkbox" class="form-checkbox" checked />
+            <div class="form-check">
+              <label class="form-check-label">
+                <input disabled="disabled" name="date[]" value="2021-10-29" type="checkbox" class="form-check-input" checked />
                 <span class="ml-2">Day 3</span>
               </label>
             </div>
-            <div>
-              <label class="inline-flex items-center">
-                <input disabled="disabled" name="date[]" value="2021-10-30" type="checkbox" class="form-checkbox" />
+            <div class="form-check">
+              <label class="form-check-label">
+                <input disabled="disabled" name="date[]" value="2021-10-30" type="checkbox" class="form-check-input" />
                 <span class="ml-2">Day 4</span>
               </label>
             </div>
-            <div>
-              <label class="inline-flex items-center">
-                <input name="date[]" value="2021-10-31" disabled="disabled" type="checkbox" class="form-checkbox" />
+            <div class="form-check">
+              <label class="form-check-label">
+                <input name="date[]" value="2021-10-31" disabled="disabled" type="checkbox" class="form-check-input" />
                 <span class="ml-2">Day 5</span>
               </label>
             </div>
@@ -69,18 +70,65 @@
           </label>
         </div>
         <div class="block">
+           <input type="hidden" id="phone_list">
            <textarea 
            class="block 
            border rounded-md w-full py-2 px-4 bg-gray-100 text-gray-700 placeholder-gray-400  rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Phone Pool" name="phonepool" id="phonepool">Loading Phone Contact</textarea>
         </div>
         <p>Phone Count:<span id="phone_count">0</span></p>
+        
+        <button class="btn btn-primary" data-message="1" id="mark_phone1">Mark phones for message 1</button>
    </div>
 
     </body>
 
     <script>
+
+async function mark_phone_on_server(num, data){
+  var button = document.getElementById(`mark_phone${num}`)
+  button.innerText = "Marking...";
+
+  fetch(`/api/mark_phone/${num}`, {
+    method: 'POST',
+    body: JSON.stringify({"phones":data}),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8'
+    }
+  })
+  .then(res => res.json())
+  .then(res => {
+     console.log(res);
+     button.innerText = "Done & Dusted";
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+
+
+}
+
     
+    var phone_list = [];
+
+    mark_phone1.addEventListener('click',function(){
+        var proceed = confirm("Ensure you have sent the message before marking...");
+        if(!proceed){
+          return;
+        }
+        var phone_list = document.getElementById('phonepool').value;
+        var phone_array = phone_list.split(',');
+
+         //console.log(phone_array);
+         return mark_phone_on_server(1, phone_array);
+         
+      });
+
     document.addEventListener("DOMContentLoaded", function(){
+      
+
+
+
       //load phone number 
     //   var checkedDate = document.querySelector('.form-checkbox:checked').value;
     //   console.log(checkedDate);
@@ -94,6 +142,8 @@
   .then(res => {
     var phones = res.data.phones
     var phone_count = res.data.phone_count
+    document.getElementById('phone_list').value = phones;
+
      console.log(phones);
      document.getElementById("phonepool").value = phones.join(", ");
      document.getElementById("phone_count").innerText = phone_count;

@@ -21,4 +21,5 @@ Route::get('phone-pool', function () {
     return view('phone-pool');
 });
 
+
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

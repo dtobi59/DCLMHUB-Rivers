@@ -11,7 +11,7 @@ class ConvertController extends Controller
     if($request->has('date')){
 
     }
-    $converts_phone = \App\Models\Convert::all('phone');
+    $converts_phone = \App\Models\Convert::whereNotIn('sent_1',[1])->get('phone');
 
     $phones = [];
     foreach ($converts_phone as $item) {
@@ -27,6 +27,32 @@ class ConvertController extends Controller
       ]
   ],200);
   }
+
+  public function mark_phone($sent_number, Request $request){
+    
+    $phones = $request->phones;
+
+    if (!$sent_number) {
+      return "Error";
+    }
+
+    foreach ($phones as $phone) {
+       $current_phone = \App\Models\Convert::where('phone',$phone)->first();
+
+       if($current_phone && $current_phone->{'sent_'.$sent_number} != 1 ){
+        $current_phone->{'sent_'.$sent_number} = 1;
+        $current_phone->save();
+       }
+
+    }
+
+    return response()->json([
+      'success' => true,
+      'message' => "Done & Dusted" ,
+      'data' => [ ]
+  ],200);
+
+  }
    public function store(Request $request){
     //   dd($request->converts[0]['phone']);
     //   return;
@@ -39,9 +65,9 @@ class ConvertController extends Controller
         $create_convert = \App\Models\Convert::firstOrNew(
             [
                 'phone'=>$convert['phone'],
-                'name' => $convert['name'], 
             ],
             [
+                'name' => $convert['name'], 
                 'date' => $convert['date'], 
                 'address' => $convert['address'],
                 'old_group_id' => $convert['old_group_id']
