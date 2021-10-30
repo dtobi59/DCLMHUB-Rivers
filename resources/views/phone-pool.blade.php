@@ -52,7 +52,7 @@
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input disabled="disabled" name="date[]" value="2021-10-30" type="checkbox" class="form-check-input" />
+                <input disabled="disabled" name="date[]" value="2021-10-30" type="checkbox" class="form-check-input" checked />
                 <span class="ml-2">Day 4</span>
               </label>
             </div>
