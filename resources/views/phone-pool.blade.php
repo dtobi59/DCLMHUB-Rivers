@@ -18,31 +18,83 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            textarea {
+                width: 700px;
+                height: 300px;
+            }
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-white dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+    <div class="block">
+  <h1 class="text-gray-700">Showers of blessing through chirst </h1>
+  <h3>Program Schedules</h3>        
+  <div class="mt-2">
+  <div>
+      <label class="inline-flex items-center">
+        <input name="date[]" value="2021-10-27" type="checkbox" class="form-checkbox" checked />
+        <span class="ml-2">Day 1</span>
+      </label>
+    </div>
+    <div>
+      <label class="inline-flex items-center">
+        <input name="date[]" value="2021-10-28" type="checkbox" class="form-checkbox" checked />
+        <span class="ml-2">Day 2</span>
+      </label>
+    </div>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+    <div>
+      <label class="inline-flex items-center">
+        <input name="date[]" value="2021-10-29" type="checkbox" class="form-checkbox" checked />
+        <span class="ml-2">Day 3</span>
+      </label>
+    </div>
+    <div>
+      <label class="inline-flex items-center">
+        <input name="date[]" value="2021-10-30" type="checkbox" class="form-checkbox" />
+        <span class="ml-2">Day 4</span>
+      </label>
+    </div>
+    <div>
+      <label class="inline-flex items-center">
+        <input name="date[]" value="2021-10-31" disabled="disabled" type="checkbox" class="form-checkbox" />
+        <span class="ml-2">Day 5</span>
+      </label>
+    </div>
+  </div>
+</div>
+        <label class="text-gray-700" for="name">
+           Phone Pool
+        </label>
+        <textarea  class="border border-gray-300 w-full py-2 px-4 bg-gray-100 text-gray-700 placeholder-gray-400  rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Phone Pool" name="phonepool" id="phonepool">Olaboye David Tobi</textarea>
+        <p>Phone Count:<span id="phone_count">0</span></p>
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 text-center">
-                <div class="justify-center pt-8 sm:justify-start sm:pt-0">
-                    <img src="{{asset('images/icon.png')}}" class="mx-auto" alt="Deeper Life">
-                    <h1><a href="{{url('phone-pool')}}">DCLM Hub</a> Rivers state</h1>
-                    <p>Built for the showers of blessing global crusade</p>
-                </div>                
-            </div>
-        </div>
     </body>
+
+    <script>
+    
+    document.addEventListener("DOMContentLoaded", function(){
+      //load phone number 
+    //   var checkedDate = document.querySelector('.form-checkbox:checked').value;
+    //   console.log(checkedDate);
+      fetch('/api/converts', {
+            method: 'GET',
+            headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+            }
+        })
+  .then(res => res.json())
+  .then(res => {
+    var phones = res.data.phones
+    var phone_count = res.data.phone_count
+     console.log(phones);
+     document.getElementById("phonepool").value = phones.join(", ");
+     document.getElementById("phone_count").innerText = phone_count;
+
+     
+  })
+  .catch(err => {
+    console.log(err);
+  });
+    });
+    </script>
 </html>
