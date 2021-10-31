@@ -7,6 +7,27 @@ use Illuminate\Http\Request;
 class ConvertController extends Controller
 {
 
+  public function all_converts(Request $request){
+    if($request->has('date')){
+
+    }
+    $converts_phone = \App\Models\Convert::all('phone');
+
+    $phones = [];
+    foreach ($converts_phone as $item) {
+      if($item->phone == "0") continue;
+      $phones[] = $item->phone;
+    }
+    return response()->json([
+      'success' => true,
+      'message' => "Data Retrived" ,
+      'data' => [
+        'phones' => $phones,
+        'phone_count' => count($phones),
+      ]
+  ],200);
+  }
+
   public function index(Request $request){
     if($request->has('date')){
 

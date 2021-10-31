@@ -64,7 +64,10 @@
             </div>
           </div>
         </div>
-        <div class="block">
+
+        <div class="row">
+            <div class="col-md">
+            <div class="block">
           <label class="font-bold text-gray-700" for="name">
             Phone Pool
           </label>
@@ -78,6 +81,20 @@
         <p>Phone Count:<span id="phone_count">0</span></p>
         
         <button class="btn btn-primary" data-message="1" id="mark_phone1">Mark phones for message 1</button>
+   
+            </div>
+
+            <div class="col-md">
+               <h1>Viewing Features</h1>
+
+               <a class="btn btn-primary" id="view-all-phone">View All Phone</a>
+
+
+            </div>
+        
+        
+        </div>
+
    </div>
 
     </body>
@@ -86,6 +103,7 @@
 
 async function mark_phone_on_server(num, data){
   var button = document.getElementById(`mark_phone${num}`)
+  
   button.innerText = "Marking...";
 
   fetch(`/api/mark_phone/${num}`, {
@@ -107,32 +125,8 @@ async function mark_phone_on_server(num, data){
 
 
 }
-
-    
-    var phone_list = [];
-
-    mark_phone1.addEventListener('click',function(){
-        var proceed = confirm("Ensure you have sent the message before marking...");
-        if(!proceed){
-          return;
-        }
-        var phone_list = document.getElementById('phonepool').value;
-        var phone_array = phone_list.split(',');
-
-         //console.log(phone_array);
-         return mark_phone_on_server(1, phone_array);
-         
-      });
-
-    document.addEventListener("DOMContentLoaded", function(){
-      
-
-
-
-      //load phone number 
-    //   var checkedDate = document.querySelector('.form-checkbox:checked').value;
-    //   console.log(checkedDate);
-      fetch('/api/converts', {
+async function fetch_converts(url){
+  fetch(url, {
             method: 'GET',
             headers: {
             'Content-type': 'application/json; charset=UTF-8'
@@ -153,6 +147,39 @@ async function mark_phone_on_server(num, data){
   .catch(err => {
     console.log(err);
   });
+  
+}
+
+
+    
+    var phone_list = [];
+    var view_all_button =  document.getElementById(`view-all-phone`);
+
+
+
+view_all_button.addEventListener('click',function(){
+  document.getElementById("phonepool").value = "Please wait, loading all phone on the server";
+
+  fetch_converts('/api/converts/all');
+});
+
+    mark_phone1.addEventListener('click',function(){
+        var proceed = confirm("Ensure you have sent the message before marking...");
+        if(!proceed){
+          return;
+        }
+        var phone_list = document.getElementById('phonepool').value;
+        var phone_array = phone_list.split(',');
+
+         //console.log(phone_array);
+         return mark_phone_on_server(1, phone_array);
+         
+      });
+
+    document.addEventListener("DOMContentLoaded", function(){
+      //load phone number 
+      fetch_converts('/api/converts');
     });
+
     </script>
 </html>

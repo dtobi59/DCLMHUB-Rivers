@@ -17,6 +17,9 @@ Route::post('converts',[\App\Http\Controllers\ConvertController::class,"store"])
 Route::post('mark_phone/{sent_number}',[\App\Http\Controllers\ConvertController::class,"mark_phone"])->name('mark_phone');
 Route::get('converts',[\App\Http\Controllers\ConvertController::class,"index"])->name('convert');
 
+
+Route::get('converts/all',[\App\Http\Controllers\ConvertController::class,"all_converts"]);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
