@@ -29,39 +29,42 @@
    <div class="p-4">
    <div class="block">
           <h1 class="text-gray-700">Showers of blessing through Christ </h1>
-          <h3>Program Schedules</h3>        
+          <h3>DCLM Rivers state Central Collation Point</h3>        
           <div class="mt-2">
-          <div class="form-check">
+           <!-- <div class="form-check">
               <label class="form-check-label">
                 <input disabled="disabled" name="date[]" value="2021-10-27" type="checkbox" class="form-check-input" checked />
                 <span class="ml-2">Day 1</span>
               </label>
-            </div>
-            <div class="form-check">
+            </div> -->
+
+            <!-- <div class="form-check">
               <label class="form-check-label">
                 <input disabled="disabled" name="date[]" value="2021-10-28" type="checkbox" class="form-check-input" checked />
                 <span class="ml-2">Day 2</span>
-              </label>
-            </div>
+              </label> 
+            </div> -->
 
-            <div class="form-check">
+            <!-- <div class="form-check">
               <label class="form-check-label">
                 <input disabled="disabled" name="date[]" value="2021-10-29" type="checkbox" class="form-check-input" checked />
                 <span class="ml-2">Day 3</span>
               </label>
-            </div>
-            <div class="form-check">
+            </div> -->
+
+            <!-- <div class="form-check">
               <label class="form-check-label">
                 <input disabled="disabled" name="date[]" value="2021-10-30" type="checkbox" class="form-check-input" checked />
                 <span class="ml-2">Day 4</span>
               </label>
-            </div>
-            <div class="form-check">
+            </div> -->
+
+            <!-- <div class="form-check">
               <label class="form-check-label">
                 <input name="date[]" value="2021-10-31" disabled="disabled" type="checkbox" class="form-check-input" />
                 <span class="ml-2">Day 5</span>
               </label>
-            </div>
+            </div> -->
           </div>
         </div>
 
