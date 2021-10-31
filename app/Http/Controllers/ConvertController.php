@@ -79,16 +79,23 @@ class ConvertController extends Controller
     //   return;
 
       $count = 0;
+      $update_count = 0;
       $converts = $request->converts;
 
       foreach ($converts as $convert) {
+        $type = null;
+
+        if(array_key_exists('type', $convert)){
+          $type = $convert['type'];
+        }
 
         $create_convert = \App\Models\Convert::firstOrNew(
             [
                 'phone'=>$convert['phone'],
             ],
             [
-                'name' => $convert['name'], 
+                'name' => $convert['name'],
+                'type' => $type,  
                 'date' => $convert['date'], 
                 'address' => $convert['address'],
                 'old_group_id' => $convert['old_group_id']
@@ -98,6 +105,12 @@ class ConvertController extends Controller
               $count += 1;
               $create_convert->save();
             }
+
+            if($type && isset($create_convert->id) ){
+              $update_count += 1;
+              $create_convert->type = $type;
+              $create_convert->save();
+            }
         
       }
 
@@ -105,6 +118,7 @@ class ConvertController extends Controller
         'success' => true,
         'message' => "$count convert(s) created" ,
         'data' => [
+          'update_count' => $update_count,
           'created_count' => $count,
           'duplicate_count' => count($converts) - $count
         ]
