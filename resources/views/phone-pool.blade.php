@@ -125,6 +125,7 @@ async function mark_phone_on_server(num, data){
 
 
 }
+
 async function fetch_converts(url){
   fetch(url, {
             method: 'GET',
@@ -159,7 +160,7 @@ async function fetch_converts(url){
 
 view_all_button.addEventListener('click',function(){
   document.getElementById("phonepool").value = "Please wait, loading all phone on the server";
-
+  document.getElementById(`mark_phone1`).disabled = true;
   fetch_converts('/api/converts/all');
 });
 
